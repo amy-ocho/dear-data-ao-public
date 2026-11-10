@@ -1,48 +1,60 @@
-// -- freelanceData map sketch
-String[] shifts; // -- array to hold
-int[] mapDifficulties; // <-- holds data point radius scale
-PVector[] shiftLevels; // <-- holds upper/lower bounds of EVP & HazardLevel
+// -- freelanceData map sketch //<>// //<>//
+// -- holds freelanceData file
+String[] freelanceShiftRows; // -- array to hold
 
-// -- shiftLevel upper/lower bounds
-float lowestEVP = 400; // -- x axis
-float highestEVP = 640;
-float lowestHazardLevel = 223; // -- y axis
-float highestHazardLevel = 300;
+// -- holds ShiftClass objects
+ArrayList<Shift> shifts = new ArrayList<Shift>();
+
+// -- holds upper/lower bounds for evp/hazard level
+float lowEVP = 400;
+float highEVP = 640;
+
+float lowHazard = 223;
+float highHazard = 300;
 
 void setup()
 {
-  size (800,800);
-  String[] freelanceShifts = loadStrings("freelanceData.csv");
-  
-  // creating arrays for shifts, mapDifficulties, shiftLevels
-  shifts = new String[freelanceShifts.length-1]; // <-- length-1 ignores header
-  mapDifficulties = new int[freelanceShifts.length-1];
-  shiftLevels = new PVector[freelanceShifts.length-1];
-  
-  // iterating and storing shift, mapDifficulty, and shiftLevel for each freelanceShift
-  for (int i=1; i < freelanceShifts.length; i = i+1)
-  {
-    // split by comma seperation
-    String[] stats = split(freelanceShifts[i], ","); //<>//
-    shifts[i-1] = stats[0]; //<>//
-    mapDifficulties[i-1] = int(stats[1]);
-    shiftLevels[i-1] = new PVector(int(stats[3]), int(stats[4]));
+  size (800, 800);
+
+  // -- read freelanceData row to create onject
+  int dataRow = 0;
+
+  freelanceShiftRows = loadStrings("freelanceData.csv"); // -- loads freelanceData from file
+
+  // -- creating objects for Shift class from each data row
+  for (String shiftRow : freelanceShiftRows) {
+    if (dataRow > 0) { // -- ignores header
+    // -- store shift method goes
+
+      // -- split row at comma and store output in stats
+      String[] stats = split(shiftRow, ",");
+
+      // take data from shiftRow for object variables
+      String shiftNum = stats[0];
+      int mapDifficulty = int(stats[1]);
+      float evpLevel = float(stats[3]);
+      float hazardLevel = float(stats[4]);
+
+      // use collected stats data to create new object for Shift class
+      Shift s = new Shift(shiftNum, mapDifficulty, evpLevel, hazardLevel);
+
+      // -- calculate where to place powerEgg (data point)
+      float x = map(evpLevel, lowEVP, highEVP, 20, width-20);
+      float y = map(hazardLevel, lowHazard, highHazard, 20, height-20);
+
+      // -- store shiftRow coords in object shiftCoords pvector
+      s.shiftCoords = new PVector(x, y);
+      
+      // -- add shiftRow to shifts ArrayList 
+      shifts.add(s);
+    }
+    // -- move onto next row
+    dataRow++;
   }
 }
+
 
 void draw()
 {
   background(0);
-  
-  // -- drawing egg circles with collected/stored stuff
-  for (int i=0; i < shifts.length; i = i +1)
-  {
-    int mapDifficulty = mapDifficulties[i];
-    PVector shiftLevel = shiftLevels[i];
-    // scale shift level to canvas w map
-    float xPos = map(shiftLevel.x, lowestEVP, highestEVP, 20, width-20);
-    float yPos = map(shiftLevel.y, highestHazardLevel, lowestHazardLevel, 20, width-20);
-    powerEgg(xPos, yPos, 25);
-  }
 }
-  
