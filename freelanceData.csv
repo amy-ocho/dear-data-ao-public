@@ -1,4 +1,4 @@
-﻿shift,mapDifficulty,rotationRating,evpLevel,hazardLevel,paintedWalls,won,kingWave,kingWaveWon,quota,eggsCollected,waitedForNewTeammates,checkedPerformanceInGame,checkedPerformanceInApp,blocked
+shift,mapDifficulty,rotationRating,evpLevel,hazardLevel,paintedWalls,won,kingWave,kingWaveWon,quota,eggsCollected,waitedForNewTeammates,checkedPerformanceInGame,checkedPerformanceInApp,blocked
 1,2,6.5,400,223,0,TRUE,FALSE,FALSE,84,101,TRUE,3,3,0
 2,2,6.5,420,232,0,TRUE,FALSE,FALSE,85,154,TRUE,3,3,2
 3,2,6.5,440,267,0,TRUE,TRUE,FALSE,90,115,TRUE,3,3,1
