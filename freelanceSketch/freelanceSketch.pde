@@ -14,7 +14,7 @@ float highHazard = 300;
 
 void setup()
 {
-  size (800, 800);
+  size (800, 700);
 
   // -- read freelanceData row to create onject
   int dataRow = 0;
@@ -57,4 +57,9 @@ void setup()
 void draw()
 {
   background(0);
+  
+  // -- loop through each shift object in its array
+  for (Shift s : shifts) {
+    s.draw();
+  }
 }

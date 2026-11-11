@@ -29,4 +29,11 @@ class Shift
   void storeShift()
   {
   }
+  
+  // -- draw position of data point with shiftCoords x and y
+  void draw ()
+  {
+    fill(255);
+    circle(shiftCoords.x, shiftCoords.y, 10);
+  }
 }
