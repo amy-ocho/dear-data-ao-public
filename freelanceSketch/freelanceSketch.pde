@@ -42,11 +42,29 @@ void setup()
       // take data from shiftRow for object variables
       String shiftNum = stats[0];
       int mapDifficulty = int(stats[1]);
+      float rotationRating = float(stats[2]);
+      
       float evpLevel = float(stats[3]);
       float hazardLevel = float(stats[4]);
+      int paintedWalls = int(stats[5]);
+      
+      boolean won = boolean(stats[6]);
+      boolean kingWave =  boolean(stats[7]);
+      boolean kingWaveWon = boolean(stats[8]);
+      
+      float quota = float(stats[9]);
+      float eggsCollected = float(stats[10]);
+      
+      boolean newTeam = boolean(stats[11]);
+      int checkedGame = int(stats[12]);
+      int checkedApp = int(stats[13]);
+      int blocked = int(stats[14]);
+      
+      
 
       // use collected stats data to create new object for Shift class
-      Shift s = new Shift(shiftNum, mapDifficulty, evpLevel, hazardLevel);
+      Shift s = new Shift(shiftNum, mapDifficulty, rotationRating, evpLevel, hazardLevel, paintedWalls, won, 
+      kingWave, kingWaveWon, quota, eggsCollected, newTeam, checkedGame, checkedApp, blocked);
 
       // -- calculate where to place powerEgg (data point)
       float x = map(evpLevel, lowEVP, highEVP, 20, width-20);
@@ -66,9 +84,18 @@ void setup()
 
 void draw()
 {
+  //background(0);
+  float count = 0;
   
 
   // -- loop through each shift object in its array
-  //for (Shift s : shifts) {
-  //  s.draw();
+  for (Shift s : shifts) 
+  {
+    s.drawBase(count);
+    s.drawMap(count);
+    s.drawRota(count);
+    s.drawPaint(count);
+    s.drawCheckG(count);
+    count= count + 10;
+  }
 }
