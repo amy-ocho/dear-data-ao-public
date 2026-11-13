@@ -12,9 +12,18 @@ float highEVP = 640;
 float lowHazard = 223;
 float highHazard = 300;
 
+
 void setup()
 {
-  size (800, 700);
+  size (800, 450);
+  background(0);
+  
+  // -- coho range from imgB[0]
+  loadThreshCoho(); // -- load image
+  findBrightness(); // -- find pixel brightness
+  drawBody(); // -- draw points on body
+
+
 
   // -- read freelanceData row to create onject
   int dataRow = 0;
@@ -24,11 +33,12 @@ void setup()
   // -- creating objects for Shift class from each data row
   for (String shiftRow : freelanceShiftRows) {
     if (dataRow > 0) { // -- ignores header
-    // -- store shift method goes
+      // -- store shift method goes
 
       // -- split row at comma and store output in stats
       String[] stats = split(shiftRow, ",");
 
+      // -- TODO: make method?
       // take data from shiftRow for object variables
       String shiftNum = stats[0];
       int mapDifficulty = int(stats[1]);
@@ -62,8 +72,8 @@ void setup()
 
       // -- store shiftRow coords in object shiftCoords pvector
       s.shiftCoords = new PVector(x, y);
-      
-      // -- add shiftRow to shifts ArrayList 
+
+      // -- add shiftRow to shifts ArrayList
       shifts.add(s);
     }
     // -- move onto next row
@@ -77,6 +87,7 @@ void draw()
   //background(0);
   float count = 0;
   
+
   // -- loop through each shift object in its array
   for (Shift s : shifts) 
   {
