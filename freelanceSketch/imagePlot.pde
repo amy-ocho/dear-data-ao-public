@@ -10,8 +10,8 @@ boolean isBody = false;
 // loading coho image
 PImage loadThreshCoho() {
   cohoImg = loadImage("cohozuna.jpg");
-  image(cohoImg, 0, 0);
-  filter(THRESHOLD, 0.35); // -- filters body as black an background as white
+  //image(cohoImg, 0, 0);
+  //filter(THRESHOLD, 0.35); // -- filters body as black an background as white
 
   return cohoImg;
 }
@@ -50,9 +50,14 @@ void drawBody()
   spacer = 10;
   image(cohoImg, 0, 0);
 
-  for (int row = 0; row < width; row = row + spacer) {
-    for (int col = 0; col < height; col = col + spacer) {
-      checkIsBody(row, col);
+  for (int row = 0; row <= width; row = row + spacer) {
+    for (int col = 0; col <= height; col = col + spacer) {
+      color cc = cohoImg.get(row, col);
+      noStroke();
+      fill(cc, 125);
+      circle(row, col, 15);
+      //checkIsBody(row, col);
     }
   }
+  //tint(255,10);
 }
