@@ -26,14 +26,17 @@ void setup()
   
   fill(0);
 // border point 1
-  circle(325, height, 10);
+  //circle(325, height, 10);
   // border point 2
-  circle(275, 450, 10);
+  //circle(275, 450, 10);
   // border point 3
-  circle(272, 215, 10);
+  //circle(272, 215, 10);
   
-  circle(980, height, 10);
-  circle(568, 270, 10);
+  //fill(0,255,0);
+  //circle(980, height, 10);
+  //fill(0,0,255);
+  //circle(780, height-200,10);
+  //circle(568, 270, 10);
   
 
   // draw point
@@ -69,8 +72,8 @@ void setup()
 
       // -- TODO: make method?
       // take data from shiftRow for object variables
-      String shiftNum = stats[0];
-      int mapDifficulty = int(stats[1]);
+      float shiftNum = float(stats[0]);
+      float mapDifficulty = float(stats[1]);
       float rotationRating = float(stats[2]);
 
       float evpLevel = float(stats[3]);
@@ -88,6 +91,9 @@ void setup()
       int checkedGame = int(stats[12]);
       int checkedApp = int(stats[13]);
       int blocked = int(stats[14]);
+      
+      
+      
 
 
 
@@ -96,14 +102,14 @@ void setup()
         kingWave, kingWaveWon, quota, eggsCollected, newTeam, checkedGame, checkedApp, blocked);
 
       // -- calculate where to place powerEgg (data point)
-      float x = map(evpLevel, lowEVP, highEVP, 20, width-20);
-      float y = map(hazardLevel, lowHazard, highHazard, 20, height-20);
+      //float x = map(evpLevel, lowEVP, highEVP, 20, width-20);
+      //float y = map(hazardLevel, lowHazard, highHazard, 20, height-20);
 
       // -- store shiftRow coords in object shiftCoords pvector
-      s.shiftCoords = new PVector(x, y);
+      //s.shiftCoords = new PVector(x, y);
 
       // -- add shiftRow to shifts ArrayList
-      shifts.add(s);
+      shifts.add(s); //<>//
     }
     // -- move onto next row
     dataRow++;
@@ -113,17 +119,20 @@ void setup()
 
 void draw()
 {
-  float count = 0;
-
+  //PVector v1, v2;
+  //v1 = new PVector(40,20);
+  //v2 = new PVector(25,50);
+  
+  //fill(255);
+  //ellipse(v1.x, v1.y, 12, 12);
+  //ellipse(v2.x, v2.y, 12, 12);
+  //v2.add(v1);
+  //ellipse(v2.x, v2.y, 24, 24);
 
   // -- loop through each shift object in its array
-  //for (Shift s : shifts)
-  //{
-  //  s.drawBase(count);
-  //  s.drawMap(count);
-  //  s.drawRota(count);
-  //  s.drawPaint(count);
-  //  s.drawCheckG(count);
-  //  count= count + 10;
-  //}
+  for (Shift s : shifts)
+  {
+    s.plotShift();
+    s.draw();
+  }
 }
